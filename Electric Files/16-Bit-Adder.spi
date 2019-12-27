@@ -1,0 +1,105 @@
+*** SPICE deck for cell 16-Bit-Adder{sch} from library ripple_carry_adders
+*** Created on Sat Oct 12, 2019 12:53:54
+*** Last revised on Sun Oct 20, 2019 01:43:28
+*** Written on Mon Oct 21, 2019 01:07:53 by Electric VLSI Design System, version 9.07
+*** Layout tech: mocmos, foundry MOSIS
+*** UC SPICE *** , MIN_RESIST 4.0, MIN_CAPAC 0.1FF
+
+*** SUBCIRCUIT ripple_carry_adders__NAND FROM CELL NAND{sch}
+.SUBCKT ripple_carry_adders__NAND A B Vout
+** GLOBAL gnd
+** GLOBAL vdd
+Mnmos@1 Vout A net@10 gnd NMOS L=0.35U W=0.875U
+Mnmos@2 net@10 B gnd gnd NMOS L=0.35U W=0.875U
+Mpmos@0 vdd A Vout vdd PMOS L=0.35U W=1.75U
+Mpmos@1 vdd B Vout vdd PMOS L=0.35U W=1.75U
+.ENDS ripple_carry_adders__NAND
+
+*** SUBCIRCUIT ripple_carry_adders__XOR FROM CELL XOR{sch}
+.SUBCKT ripple_carry_adders__XOR A B Vout
+** GLOBAL gnd
+** GLOBAL vdd
+Mnmos@0 Vout B net@0 gnd NMOS L=0.35U W=0.875U
+Mnmos@1 net@0 A gnd gnd NMOS L=0.35U W=0.875U
+Mnmos@3 net@70 B gnd gnd NMOS L=0.35U W=0.875U
+Mnmos@5 net@6 net@57 gnd gnd NMOS L=0.35U W=0.875U
+Mnmos@6 net@57 A gnd gnd NMOS L=0.35U W=0.875U
+Mnmos@7 Vout net@70 net@6 gnd NMOS L=0.35U W=0.875U
+Mpmos@0 vdd net@70 net@113 vdd PMOS L=0.35U W=1.75U
+Mpmos@1 vdd B net@112 vdd PMOS L=0.35U W=1.75U
+Mpmos@2 net@113 A Vout vdd PMOS L=0.35U W=1.75U
+Mpmos@5 net@112 net@57 Vout vdd PMOS L=0.35U W=1.75U
+Mpmos@6 vdd B net@70 vdd PMOS L=0.35U W=1.75U
+Mpmos@7 vdd A net@57 vdd PMOS L=0.35U W=1.75U
+.ENDS ripple_carry_adders__XOR
+
+*** SUBCIRCUIT ripple_carry_adders__FullAdder FROM CELL FullAdder{sch}
+.SUBCKT ripple_carry_adders__FullAdder A B CarryOut Cin Sum
+** GLOBAL gnd
+** GLOBAL vdd
+XNAND@0 Cin net@3 net@56 ripple_carry_adders__NAND
+XNAND@1 B A net@55 ripple_carry_adders__NAND
+XNAND@2 net@56 net@55 CarryOut ripple_carry_adders__NAND
+XXOR@0 A B net@3 ripple_carry_adders__XOR
+XXOR@1 net@3 Cin Sum ripple_carry_adders__XOR
+.ENDS ripple_carry_adders__FullAdder
+
+.global gnd vdd
+
+*** TOP LEVEL CELL: 16-Bit-Adder{sch}
+XFullAdde@73 A0 B0 net@464 Cin Sum0 ripple_carry_adders__FullAdder
+XFullAdde@74 A4 B4 net@509 net@506 Sum4 ripple_carry_adders__FullAdder
+XFullAdde@75 A8 B8 net@524 net@518 Sum8 ripple_carry_adders__FullAdder
+XFullAdde@76 A12 B12 net@540 net@533 Sum12 ripple_carry_adders__FullAdder
+XFullAdde@78 A1 B1 net@467 net@464 Sum1 ripple_carry_adders__FullAdder
+XFullAdde@79 A5 B5 net@512 net@509 Sum5 ripple_carry_adders__FullAdder
+XFullAdde@80 A9 B9 net@527 net@524 Sum9 ripple_carry_adders__FullAdder
+XFullAdde@81 A13 B13 net@543 net@540 Sum13 ripple_carry_adders__FullAdder
+XFullAdde@82 A2 B2 net@472 net@467 Sum2 ripple_carry_adders__FullAdder
+XFullAdde@83 A6 B6 net@515 net@512 Sum6 ripple_carry_adders__FullAdder
+XFullAdde@84 A10 B10 net@530 net@527 Sum10 ripple_carry_adders__FullAdder
+XFullAdde@85 A14 B14 net@546 net@543 Sum14 ripple_carry_adders__FullAdder
+XFullAdde@86 A3 B3 net@506 net@472 Sum3 ripple_carry_adders__FullAdder
+XFullAdde@87 A7 B7 net@518 net@515 Sum7 ripple_carry_adders__FullAdder
+XFullAdde@88 A11 B11 net@533 net@530 Sum11 ripple_carry_adders__FullAdder
+XFullAdde@89 A15 B15 Cout net@546 Sum15 ripple_carry_adders__FullAdder
+
+* Spice Code nodes in cell cell '16-Bit-Adder{sch}'
+VDD VDD 0 DC 3.3
+VGND GND 0 DC 0
+Vin Cin 0 DC 0
+Vin2 A0 0 PULSE (3.3 0 20n 0.01n 0.01n 40n 80n)
+Vin3 A1 0 PULSE (3.3 0 20n 0.01n 0.01n 20n 40n)
+Vin4 A2 0 DC 0
+Vin5 A3 0 PULSE (3.3 0 20n 0.01n 0.01n 20n 60n)
+Vin6 A4 0 PULSE (3.3 0 0 0.01n 0.01n 20n 80n)
+Vin7 A5 0 PULSE (3.3 0 20n 0.01n 0.01n 40n 80n)
+Vin8 A6 0 PULSE (3.3 0 20n 0.01n 0.01n 80n 80n)
+Vin9 A7 0 PULSE (3.3 0 0 0.01n 0.01n 40n 80n)
+Vin10 A8 0 PULSE (3.3 0 0 0.01n 0.01n 60n 80n)
+Vin11 A9 0 PULSE (3.3 0 0 0.01n 0.01n 60n 80n)
+Vin12 A10 0 PULSE (3.3 0 0 0.01n 0.01n 40n 80n)
+Vin13 A11 0 PULSE (3.3 0 0 0.01n 0.01n 40n 80n)
+Vin14 A12 0 PULSE (3.3 0 0 0.01n 0.01n 60n 80n)
+Vin15 A13 0 PULSE (3.3 0 0 0.01n 0.01n 60n 80n)
+Vin16 A14 0 PULSE (3.3 0 0 0.01n 0.01n 40n 80n)
+Vin17 A15 0 PULSE (3.3 0 0 0.01n 0.01n 40n 80n)
+Vin18 B0 0 PULSE (3.3 0 0 0.01n 0.01n 40n 60n)
+Vin19 B1 0 DC 0
+Vin20 B2 0 PULSE (3.3 0 0 0.01n 0.01n 20n 60n)
+Vin21 B3 0 PULSE (3.3 0 0 0.01n 0.01n 40n 60n)
+Vin22 B4 0 PULSE (3.3 0 0 0.01n 0.01n 60n 80n)
+Vin23 B5 0 PULSE (3.3 0 40n 0.01n 0.01n 20n 40n)
+Vin24 B6 0 DC 3.3
+Vin25 B7 0 PULSE (3.3 0 40n 0.01n 0.01n 20n 40n)
+Vin26 B8 0 PULSE (3.3 0 40n 0.01n 0.01n 40n 40n)
+Vin27 B9 0 PULSE (3.3 0 60n 0.01n 0.01n 20n 20n)
+Vin28 B10 0 PULSE (3.3 0 40n 0.01n 0.01n 40n 40n)
+Vin29 B11 0 PULSE (3.3 0 40n 0.01n 0.01n 20n 40n)
+Vin30 B12 0 PULSE (3.3 0 40n 0.01n 0.01n 20n 40n)
+Vin31 B13 0 PULSE (3.3 0 40n 0.01n 0.01n 40n 40n)
+Vin32 B14 0 PULSE (3.3 0 40n 0.01n 0.01n 20n 40n)
+Vin33 B15 0 PULSE (3.3 0 40n 0.01n 0.01n 20n 40n)
+.TRAN 0 80n
+.include C:\Users\kille\Desktop\Electric\C5_models.txt
+.END

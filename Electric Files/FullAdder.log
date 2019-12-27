@@ -1,0 +1,27 @@
+Circuit: *** SPICE deck for cell FullAdder{lay} from library ripple_carry_adders
+
+Vgnd: both pins shorted together -- ignoring.
+Ignoring BSIM parameter XL
+Ignoring BSIM parameter XW
+Ignoring BSIM parameter XL
+Ignoring BSIM parameter XW
+Direct Newton iteration for .op point succeeded.
+
+Date: Sat Oct 19 20:03:19 2019
+Total elapsed time: 0.672 seconds.
+
+tnom = 27
+temp = 27
+method = modified trap
+totiter = 3769
+traniter = 3739
+tranpoints = 1612
+accept = 1442
+rejected = 170
+matrix size = 26
+fillins = 4
+solver = Normal
+Thread vector: 168.7/34.9[3] 8.7/5.2[3] 2.0/3.2[1] 0.5/3.9[1]  2592/500
+Matrix Compiler1: 2.79 KB object code size  1.2/0.7/[0.3]
+Matrix Compiler2: 3.25 KB object code size  0.7/1.1/[0.4]
+

@@ -1,0 +1,31 @@
+*** SPICE deck for cell XOR{lay} from library ripple_carry_adders
+*** Created on Fri Oct 18, 2019 18:12:34
+*** Last revised on Sat Oct 19, 2019 12:17:32
+*** Written on Sat Oct 19, 2019 12:17:35 by Electric VLSI Design System, version 9.07
+*** Layout tech: mocmos, foundry MOSIS
+*** UC SPICE *** , MIN_RESIST 4.0, MIN_CAPAC 0.1FF
+*** WARNING: no power connection for P-transistor wells in cell 'XOR{lay}'
+*** WARNING: no ground connection for N-transistor wells in cell 'XOR{lay}'
+
+*** TOP LEVEL CELL: XOR{lay}
+Mnmos@2 net@7 A GND gnd NMOS L=0.35U W=1.75U AS=5.512P AD=1.991P PS=13.824U PD=5.775U
+Mnmos@9 net@97 A Vout gnd NMOS L=0.35U W=1.75U AS=1.225P AD=1.608P PS=3.15U PD=4.462U
+Mnmos@10 Vout net@100 net@97 gnd NMOS L=0.35U W=1.75U AS=1.608P AD=1.225P PS=4.462U PD=3.15U
+Mnmos@11 net@97 net@7 GND gnd NMOS L=0.35U W=1.75U AS=5.512P AD=1.608P PS=13.824U PD=4.462U
+Mnmos@12 GND B net@97 gnd NMOS L=0.35U W=1.75U AS=1.608P AD=5.512P PS=4.462U PD=13.824U
+Mnmos@13 net@100 B GND gnd NMOS L=0.35U W=1.75U AS=5.512P AD=1.991P PS=13.824U PD=5.775U
+Mpmos@1 VDD A net@7 vdd PMOS L=0.35U W=1.75U AS=1.991P AD=5.895P PS=5.775U PD=15.138U
+Mpmos@9 net@102 net@100 Vout vdd PMOS L=0.35U W=1.75U AS=1.225P AD=1.914P PS=3.15U PD=3.937U
+Mpmos@10 VDD A net@102 vdd PMOS L=0.35U W=1.75U AS=1.914P AD=5.895P PS=3.937U PD=15.138U
+Mpmos@11 net@121 B VDD vdd PMOS L=0.35U W=1.75U AS=5.895P AD=1.914P PS=15.138U PD=3.937U
+Mpmos@12 Vout net@7 net@121 vdd PMOS L=0.35U W=1.75U AS=1.914P AD=1.225P PS=3.937U PD=3.15U
+Mpmos@14 net@100 B VDD vdd PMOS L=0.35U W=1.75U AS=5.895P AD=1.991P PS=15.138U PD=5.775U
+
+* Spice Code nodes in cell cell 'XOR{lay}'
+VDD VDD 0 DC 3.3
+VGND GND 0 DC 0
+Vin A 0 PULSE (3.3 0 0 0.01n 0.01n 10n 20n)
+Vin2 B 0 PULSE (3.3 0 0 0.01n 0.01n 20n 40n)
+.TRAN 0 100n
+.include C:\Users\kille\Desktop\Electric\C5_models.txt
+.END
